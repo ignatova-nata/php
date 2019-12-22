@@ -1,6 +1,6 @@
 <?php
 $post = $_POST;
-var_dump($post);
+//var_dump($post);
 
 $files = $_FILES;
 var_dump($files);
@@ -19,8 +19,10 @@ foreach ($files['picture']['name'] as $key => $value) {
     $new_name[] = null;
   }
 }
-var_dump($new_name);
-
+//var_dump($new_name);
 foreach ($new_name as $key => $value) {
-      move_uploaded_file($files['picture']['tmp_name'][$key], "img2\\$new_name[$key]");
+  if ($new_name[$key] !== null) {
+      move_uploaded_file($files['picture']['tmp_name'][$key], "img2/$new_name[$key]");
+      echo "файл " . $files['picture']['name'][$key] . " загружен <br>";
+    }
 }
