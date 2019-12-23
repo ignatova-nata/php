@@ -20,6 +20,7 @@ foreach ($files['picture']['name'] as $key => $value) {
   }
 }
 //var_dump($new_name);
+
 foreach ($new_name as $key => $value) {
   if ($new_name[$key] !== null) {
       move_uploaded_file($files['picture']['tmp_name'][$key], "img2/$new_name[$key]");
