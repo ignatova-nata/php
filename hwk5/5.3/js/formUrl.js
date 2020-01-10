@@ -2,7 +2,8 @@ let error_field = document.getElementById('errors');
 let form = document.forms.url;
 
 function validate() {
-    let re = /(^https?:\/\/)?[a-z0-9~_\-\.]+\.[a-z]{2,4}(\/|:|\?[!-~]*)?$/i;;
+    let re = /(^https?:\/\/)?[a-z0-9~_\-\.]+\.[a-z]{2,4}(\/|:|\?[!-~]*)?$/i;
+    //let re = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
     if (!(re.test(form.url.value))) {
         error_field.innerHTML = 'Введите URL';
         return false;
