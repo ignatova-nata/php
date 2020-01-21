@@ -123,19 +123,48 @@ var_dump("Задание 4. ", $arr1,array_column(sortArr($arr1),'0'),array_colu
 перевод всех символов в нижний регистр,
 перевод всех символов в нижний регистр
 и первых символов слов в верхний регистр.*/
-$string1 = "when Harry met Sally";
+$string1 = "Кукушка кукушоку Купила";
+$string2 = "When Harry met sally";
 function stringConvert (string $string, callable $func):string {
-                       return $new_string = $func($string);
+                       return  $func($string);
                      }
 $stringUp = function ($string) {
-    return strtoupper($string);
-    };
+    if (!preg_match("/[а-яА-Я]/ui",$string))
+    { $new_string = strtoupper($string);
+    } else {
+    $new_string = mb_strtoupper($string);
+    }
+    return $new_string;
+};
+
 $stringDown = function ($string) {
-    return strtolower($string);
-    };
+  if (!preg_match("/[а-яА-Я]/ui",$string))
+    { $new_string = strtolower($string);
+  } else {
+    $new_string = mb_strtolower($string);
+  }
+  return $new_string;
+};
+
 $stringUpDown = function ($string) {
-    return ucwords($string);
-    };
+    if (!preg_match("/[а-яА-Я]/ui",$string))
+      {
+        $new_string = ucwords($string);
+      } else {
+        $strArr = mb_split(" ", mb_strtolower($string));
+        $newStrArr = [];
+        for ($i = 0; $i < count($strArr); $i++) {
+        $upWord = mb_convert_case($strArr[$i], MB_CASE_TITLE);
+        array_push($newStrArr, $upWord);
+        $new_string = implode(" ", $newStrArr);
+        }
+    }
+    return $new_string;
+};
+
 var_dump("Задание 5.", stringConvert($string1, $stringUp));
+var_dump(stringConvert($string2, $stringUp));
 var_dump(stringConvert($string1, $stringDown));
+var_dump(stringConvert($string2, $stringDown));
 var_dump(stringConvert($string1, $stringUpDown));
+var_dump(stringConvert($string2, $stringUpDown));
